@@ -18,7 +18,6 @@
 import express from 'express';
 import fetch from 'node-fetch';
 import htmlParser from 'node-html-parser';
-import lyrics from './lyrics.js';
 
 const app = express();
 
@@ -63,10 +62,6 @@ app.get('/', (_, res) =>
     'https://poketube.fun/watch?v=l3eww1dnd0k&trck=we_dont_lol&hi=mom&i_like_this=yes&omgfr=tru&AAAAA=BBBBBB&unclebenwhathappend=squidgames'
   )
 );
-
-app.get('/api/lyrics', async (req, res) => {
-  res.json(await lyrics(req.query.query));
-});
 
 app.all('/*', proxy);
 
