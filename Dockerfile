@@ -2,9 +2,9 @@ FROM node
 LABEL authors="Poketube"
 
 # update dependencies and install curl
-RUN apt-get update && apt-get install -y \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install curl -y && \
+    rm -rf /var/lib/apt/lists/*
 
 # Create app directory
 WORKDIR /app
@@ -20,14 +20,7 @@ WORKDIR /app
 COPY . .
 
 # update each dependency in package.json to the latest version
-RUN npm install -g npm-check-updates \
-    ncu -u \
-    npm install \
-    npm install express \
-    npm install node-html-parser \
-    npm i node-fetch@2.6.6 \
-    npm install encoding \
-    npm install html-to-text 
+RUN npm update --save
 
 # If you are building your code for production
 # npm ci will install dependecies from package-lock.json
